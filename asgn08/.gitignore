@@ -1,0 +1,8 @@
+# Database credentials
+/private/db_credentials.php
+
+# macOS files
+.DS_Store
+
+# Local logs
+*.log
