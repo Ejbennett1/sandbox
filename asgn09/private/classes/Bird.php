@@ -98,20 +98,20 @@ public function create(): bool
     }
 
     $sql = 'INSERT INTO birds (
-                common_name,
-                scientific_name,
-                family_name,
-                primary_habitat,
-                seasonal_status,
-                description
-            ) VALUES (
-                :common_name,
-                :scientific_name,
-                :family_name,
-                :primary_habitat,
-                :seasonal_status,
-                :description
-            )';
+        common_name,
+        scientific_name,
+        family_name,
+        primary_habitat,
+        seasonal_status,
+        description
+    ) VALUES (
+        :common_name,
+        :scientific_name,
+        :family_name,
+        :primary_habitat,
+        :seasonal_status,
+        :description
+    )';
 
     $statement = self::$database->prepare($sql);
 
