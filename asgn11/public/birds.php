@@ -9,16 +9,34 @@ $birds = Bird::find_all();
 
 <!doctype html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <title>Bird Directory</title>
 </head>
+
 <body>
     <h1>Bird Directory</h1>
 
-    <p><a href="index.php">Back to index</a></p>
+    <nav>
+        <a href="index.php">Back to index</a> |
 
-    <p><a href="bird_new.php">Create Bird</a></p>
+        <?php if (is_logged_in()): ?>
+
+            Logged in as <?= h($_SESSION['username']) ?> |
+            <a href="logout.php">Logout</a>
+
+        <?php else: ?>
+
+            <a href="register.php">Register</a> |
+            <a href="login.php">Login</a>
+
+        <?php endif; ?>
+    </nav>
+
+    <?php if (is_logged_in()): ?>
+        <p><a href="bird_new.php">Create Bird</a></p>
+    <?php endif; ?>
 
     <?php if ($birds === []): ?>
         <p>No birds were found.</p>
@@ -42,10 +60,13 @@ $birds = Bird::find_all();
                         <td><?= h($bird->seasonal_status) ?></td>
                         <td>
                             <a href="bird.php?id=<?= (int) $bird->id ?>">View details</a>
-                            |
-                            <a href="bird_edit.php?id=<?= (int) $bird->id ?>">Update</a>
-                            |
-                            <a href="bird_delete.php?id=<?= (int) $bird->id ?>">Delete</a>
+
+                            <?php if (is_logged_in()): ?>
+                                |
+                                <a href="bird_edit.php?id=<?= (int) $bird->id ?>">Update</a>
+                                |
+                                <a href="bird_delete.php?id=<?= (int) $bird->id ?>">Delete</a>
+                            <?php endif; ?>
                         </td>
                     </tr>
                 <?php endforeach; ?>
@@ -53,4 +74,5 @@ $birds = Bird::find_all();
         </table>
     <?php endif; ?>
 </body>
+
 </html>
