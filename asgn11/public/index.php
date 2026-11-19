@@ -19,14 +19,30 @@ try {
 ?>
 <!doctype html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
-    <title>WEB 250 asgn09 - WNC Birds</title>
+    <title>WEB 250 asgn11 - WNC Birds</title>
 </head>
-<body>
-    <h1>WEB 250 asgn09 - WNC Birds</h1>
 
-    <p><a href="birds.php">Bird Directory</a></p>
+<body>
+    <h1>WEB 250 asgn11 - WNC Birds</h1>
+
+    <nav>
+        <a href="birds.php">Bird Directory</a> |
+
+        <?php if (isset($_SESSION['member_id'])): ?>
+
+            Logged in as <?= h($_SESSION['username']) ?> |
+            <a href="logout.php">Logout</a>
+
+        <?php else: ?>
+
+            <a href="register.php">Register</a> |
+            <a href="login.php">Login</a>
+
+        <?php endif; ?>
+    </nav>
 
     <?php if ($error_message !== ''): ?>
         <p><?= h($error_message) ?></p>
@@ -40,11 +56,21 @@ try {
                 </tr>
             </thead>
             <tbody>
-                <tr><td>birds</td><td><?= $bird_count ?></td></tr>
-                <tr><td>bird_images</td><td><?= $image_count ?></td></tr>
-                <tr><td>bird_image_links</td><td><?= $link_count ?></td></tr>
+                <tr>
+                    <td>birds</td>
+                    <td><?= $bird_count ?></td>
+                </tr>
+                <tr>
+                    <td>bird_images</td>
+                    <td><?= $image_count ?></td>
+                </tr>
+                <tr>
+                    <td>bird_image_links</td>
+                    <td><?= $link_count ?></td>
+                </tr>
             </tbody>
         </table>
     <?php endif; ?>
 </body>
+
 </html>
